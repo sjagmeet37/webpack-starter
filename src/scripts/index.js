@@ -87,6 +87,27 @@ console.log(Number.parseInt('55'));
 console.log(Number.parseFloat('55.66'));
 
 
+//equality operator
+
+console.log(1 == 1);
+console.log(1 === 1);
+
+console.log(1 == '1'); // == automatically try type conversion while === not
+console.log(1 === '1');
+
+console.log(1 != '1'); // != automatically try type conversion while !== not
+console.log(1 !== '1');
+
+// unary operator
+// ++variable
+// --variable
+// +variable 
+// -variable converts negative to positive // check their working with string
+
+//conditional operator
+(5>6) ? console.log(true) : console.log(false);
+
+
 
 
 
