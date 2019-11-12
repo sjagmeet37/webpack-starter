@@ -234,7 +234,7 @@ console.log(defaultParam('Bengaluru', 'Karanataka'));
 // Objects
 
 let card = {}; //an empty object
-
+//also called object literals
 let card1 = {
     suit : 'Hearts',
     value : 2
@@ -280,7 +280,7 @@ console.log(Number.isNaN());
  * 
  */
 // this is empty constructor function
-//convention is to declare it like class declaration in java
+//convention is to declare it like   declaration in java
  function MyConstructorFunction(){
        
  };
@@ -314,7 +314,7 @@ console.log(Number.isNaN());
  Bike.prototype.getBikeName = function(){
      return 'Bike Name is ' + this.bikeName;
  };
-//extending prortype
+//extending protoype
  String.prototype.str = function( myArg ){
     return JSON.stringify(myArg);
  };
@@ -341,3 +341,86 @@ console.log(Number.isNaN());
  console.log('foo'.str('jsonObj'));
 
  console.log(myBike.strgify(myObj));// while extending prototype use object referece to access object
+ 
+
+ class Cat{
+     constructor(name){
+         this.name = name;
+     }
+
+     speak(){
+         console.log("I'm cat");
+     }
+ }
+
+ let c = new Cat('sweety');
+ console.log(c.name);
+ c.speak();
+
+ // Object Properties
+//  Object property descriptor
+var test = {
+    name : "Jagmeet",
+    age : 23
+};
+
+console.log(Object.getOwnPropertyDescriptor(test, 'name'));
+console.log(Object.getOwnPropertyDescriptor(test, 'age'));
+
+// making values constant
+let constTest = {
+    name : "jagmeet",
+    age : 23
+};
+
+Object.defineProperty(constTest, 'name', {writable:false});
+//constTest.name = "singh"; // will throw error as val is constatnt
+
+let constTest2 = {
+    name : {first : "jagmeet", second : "singh"},
+    age : 23
+};
+
+Object.defineProperty(constTest, 'name', {writable:false}); //object pointer is only constant you can modify inner values
+constTest2.name.first = "jagmeet2";
+console.log(constTest2);
+// to make internal object const use freeze method
+Object.freeze(constTest2.name);
+//constTest2.name.first = "jagmeet2"; // will throw error
+
+//Enumerable is object property that defines weather a property can be accesed or not
+//if enumerable is set to false you can access property only via bracket notation
+//this also impacts object serialization to json as values with enumerable with true are serialized
+Object.defineProperty(constTest2, 'name', {enumerable:false});
+//only age will be displayed
+for(let property in constTest2){
+    console.log(property + " value is " + constTest[property]);
+}
+
+
+//configurable
+// once a property's configurable is set to false you can't delete the property
+//you can't change the enuberable 
+//you can't make it configurable again
+
+Object.defineProperty(constTest, 'name', {configurable:false});
+// Object.defineProperty(constTest, 'name', {configurable:true});//error
+// delete constTest2.name;//error
+//Object.defineProperty(constTest2, 'name', {enumerable:false}); // error
+
+//getters and setters using object.define property
+let getterAndSetter = {
+    name : "jagmeet",
+    age  : 19
+};
+
+Object.defineProperty(getterAndSetter, 'getName', {
+    get : function(){
+        return this.name;
+    },
+    set : function( name ){
+        this.name = name;
+    }
+});
+getterAndSetter.getName.set("jagmeet2");
+console.log(getterAndSetter.getName);   
